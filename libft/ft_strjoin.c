@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/08 16:20:38 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/08 16:20:40 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	int		a;
+	char	*ret;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
-	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
+	a = 0;
+	if (!s1 || !s2)
 		return (0);
+	ret = ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!ret)
+		return (0);
+	while (*s1)
+	{
+		ret[a] = *s1;
+		s1++;
+		a++;
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	while (*s2)
+	{
+		ret[a] = *s2;
+		s2++;
+		a++;
+	}
+	ret[a] = '\0';
+	return (ret);
 }

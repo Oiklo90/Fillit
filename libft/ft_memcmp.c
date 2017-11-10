@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/08 09:51:41 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/08 09:51:41 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	unsigned char	*str1;
+	unsigned char	*str2;
+	size_t			i;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n)
 	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
-		return (0);
+		if (str1[i] == str2[i])
+			i++;
+		else
+			return (str1[i] - str2[i]);
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	return (0);
 }

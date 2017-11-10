@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/07 14:29:13 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/07 14:29:51 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	char *str;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
+	str = b;
+	while (len--)
 	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
-		return (0);
+		*str = (unsigned char)c;
+		str++;
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	return (b);
 }

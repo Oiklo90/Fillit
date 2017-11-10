@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/08 16:49:18 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/08 16:49:18 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strtrim(char const *s)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	char	*str;
+	int		i;
+	int		end;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
-	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
+	i = 0;
+	if (!s)
+		return (NULL);
+	end = ft_strlen(s);
+	while (ft_isspace(s[i]) == 1)
+		i++;
+	if (s[i] == '\0')
+		return (ft_strdup(""));
+	if (s[end] == '\0')
+		end--;
+	while (ft_isspace(s[end]) == 1)
+		end--;
+	if ((str = ft_strsub(s, i, end - i + 1)) == 0)
 		return (0);
-	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	return (str);
 }

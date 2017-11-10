@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/08 12:49:43 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/08 12:49:44 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	size_t len_d;
+	size_t len_s;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
-	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
-		return (0);
-	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	len_d = ft_strlen(dst);
+	len_s = ft_strlen(src);
+	if (len_d >= size)
+		return (size + len_s);
+	else
+		ft_strncat(dst, src, size - len_d - 1);
+	return (len_d + len_s);
 }

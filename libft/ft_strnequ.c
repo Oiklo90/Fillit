@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/08 15:54:01 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/08 15:54:01 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+int		ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	int		i;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
-	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
+	i = 0;
+	if (!s1 || !s2)
 		return (0);
+	while (s1[i] != '\0' && n > 0)
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			return (0);
+		n--;
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	return (1);
 }

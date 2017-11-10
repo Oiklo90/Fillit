@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/09/06 16:22:04 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/07 17:33:19 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	size_t a;
+	size_t lon;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
+	lon = 0;
+	a = ft_strlen(s1);
+	while (lon < n && s2[lon])
 	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
-		return (0);
+		s1[a + lon] = s2[lon];
+		lon++;
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	s1[a + lon] = '\0';
+	return (s1);
 }

@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llonger <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 13:59:27 by llonger           #+#    #+#             */
-/*   Updated: 2017/11/10 13:59:27 by llonger          ###   ########.fr       */
+/*   Created: 2017/11/09 12:55:53 by llonger           #+#    #+#             */
+/*   Updated: 2017/11/09 12:55:54 by llonger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-//#include "fillit.h"
+#include "libft.h"
 
-void	ft_error(void)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	ft_putendl("error");
-	exit(EXIT_FAILURE);
-}
+	t_list	*begin;
 
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
+	if (!(begin = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	if (lst && f)
 	{
-		ft_putendl("usage: ./fillit <file_name> \n \
-	you need one file_name to run fillit, not zero, not two, \
-not 1 000000000000!!!");
-		return (0);
+		begin = f(lst);
+		if (lst)
+			begin->next = ft_lstmap(lst->next, f);
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		ft_error();
+	return (begin);
 }
