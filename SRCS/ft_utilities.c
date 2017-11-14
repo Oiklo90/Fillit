@@ -12,6 +12,19 @@
 
 #include "fillit.h"
 
+static void	bzero_tetriminos(char **tetri)
+{
+	int		i;
+
+	i = 0;
+	while (i < 26)
+	{
+		*tetri = NULL;
+		++tetri;
+		++i;
+	}
+}
+
 char	**ft_read_file(int fd)
 {
 	char	**tetri;
@@ -21,6 +34,7 @@ char	**ft_read_file(int fd)
 
 	if ((tetri = (char **)malloc(sizeof(char *) * MSIZE + 1)) == NULL)
 		return (NULL);
+	bzero_tetriminos(tetri);
 	if (read(fd, buff, BUFFSIZE) <= 0)
 		return (NULL);
 	if (!ft_errors(buff))

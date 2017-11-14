@@ -23,7 +23,7 @@ int		main(int ac, char **av)
 {
 	int		fd;
 	char	**tetri;
-	char	*sol;
+	char	*feelit;
 
 	if (ac != 2)
 	{
@@ -37,7 +37,11 @@ not 1 000000000000!!!");
 		ft_error();
 	if ((tetri = ft_read_file(fd)) == NULL)
 		ft_error();
-	//if ((sol = ft_resolve(tetri)) == NULL)
-	//	ft_error();
+	if ((feelit = ft_solver(tetri)) == NULL)
+		ft_error();
+	//ft_putstr(feelit);
+	close(fd);
+	free(tetri);
+	free(feelit);
 	return 0;
 }
