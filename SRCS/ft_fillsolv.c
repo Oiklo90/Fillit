@@ -23,6 +23,7 @@ int		ft_place(char *tetri, char *feelit, int index, char a)
 		i++;
 	if (ft_set(tetri, i, feelit, index, a) == 4)
 		return (1);
+	ft_reset(tetri);
 	while (feelit[j])
 	{
 		if (feelit[j] == a)
@@ -36,23 +37,24 @@ int		ft_fill(char **feelit, char **tetri , int index)
 {
 	char	*tmp;
 	char	a;
-	int		i;
+	int		posfeel;
 
-	i = 0;
+	posfeel = 0;
 	a = 'A';
 	if (tetri[index] == NULL)
 		return (1);
 	tmp = ft_strdup(*feelit);
-	while ((*feelit)[i])
+	while (tmp[posfeel])
 	{
-		if (ft_place(tetri[index], *feelit, i, 'A' + index) == 0)
+		if (ft_place(tetri[index], tmp, posfeel, 'A' + index) == 0)
 		{
-			i++;
-			printf("i = %d\n index = %d\n", i, index);
+			posfeel++;
+		//	printf("i = %d\n index = %d\n", i, index);
 			continue ;
 		}
-		if (ft_fill(feelit, tetri, index + 1))
+		if (ft_fill(&tmp, tetri, index + 1))
 		{
+			*feelit = ft_strdup(tmp);
 			free(tmp);
 			return (1);
 		}
@@ -88,13 +90,20 @@ char	*ft_solver(char **tetri)
 	j = 0;
 	while (tetri[i])
 		i++;
+//	if (i <= 6)
+//		i = 7;
 	i = i * 4;
 	while (j * j < i)
 		j++;
 	if ((feelit = (char *)malloc(sizeof(char) * ((j + 1) * j))) == NULL)
 		return (NULL);
 	ft_start_sol(feelit, j);
-	ft_fill(&feelit, tetri, 0);
+	while ((ft_fill(&feelit, tetri, 0)) == 0)
+	{
+		if ((ft_bigger_square(feelit, j)) == NULL)
+			return (NULL);
+		j++;
+	}
 	ft_putstr(feelit);
 	return (feelit);
 }

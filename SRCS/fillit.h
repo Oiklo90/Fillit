@@ -24,5 +24,7 @@ int		ft_fill(char **feelit, char **tetri , int index);
 void	ft_start_sol(char *feelit, int j);
 char	*ft_solver(char **tetri);
 int		ft_place(char *tetri, char *feelit, int index, char a);
+char	*ft_bigger_square(char	*feelit, int j);
+void	ft_reset(char *tetri);
 
 #endif
